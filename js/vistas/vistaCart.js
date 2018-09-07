@@ -54,7 +54,18 @@ VistaCart.prototype = {
       // sacamos la clase hide
       $clone.removeClass('hide');
       // le insertamos el texto del producto al template clonado
+      $clone.find(".product-widget").text(product.id);
       $clone.find("h3.product-name a").text(product.name);
+      $clone.find("div.product-img img").attr("src", './img/' + product.image);
+      //$clone.find("h4.product-price").text(`x ${product.cantidad} - ${product.precio} `);
+      var html = $clone.find("h4.product-price").html()
+      html = html.replace("{productName}", product.name)
+      html = html.replace("{qty}", product.cantidad)
+      html = html.replace("{price}", product.precio)
+      $clone.find("h4.product-price").html(html)
+
+
+
       // agregamos el template a cart-list
       cartList.append($clone);
     })
